@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ordklassjakten – substantiv, verb, adjektiv, pronomen (åk 4–6)</title>
+<meta name="description" content="Läs en mening, titta på det markerade ordet och välj vilken ordklass det är: substantiv, verb, adjektiv eller pronomen. 114 riktiga meningar i tre nivåer. Svenska åk 4–6. Gratis, ingen inloggning.">
+<meta name="theme-color" content="#faf7f2">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:title" content="Ordklassjakten">
+<meta property="og:description" content="Vilken ordklass är ordet? Substantiv, verb, adjektiv eller pronomen. Svenska åk 4–6, 114 meningar i tre nivåer.">
+<meta property="og:image" content="og.png">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="styles.css">
+<script src="https://www.skolappar.com/kotten.js" defer></script>
+</head>
+<body>
+
+<div id="startskarm">
+  <div class="sk-inner">
+    <img class="sk-ikon" src="icon-192.png" alt="" width="88" height="88">
+    <h1>Ordklassjakten</h1>
+    <p class="sk-tagline">Läs meningen. Vilken ordklass är ordet som lyser?</p>
+    <div class="sk-taggar"><span>Svenska</span><span>Åk 4–6</span><span>Ordklasser</span></div>
+    <button class="sk-play" id="spela" aria-label="Spela Ordklassjakten">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+      Spela
+    </button>
+    <p class="sk-fot">Gratis · ingen inloggning · inga länkar ut · skolappar.com</p>
+    <details class="sk-laroplan">
+      <summary>Läroplanskoppling (Lgr22)</summary>
+      <p><b>Svenska, åk 4–6, centralt innehåll:</b> ”Stavning, ords böjningsformer och ordklasser.”</p>
+      <p>Varje uppgift är en riktig mening där ett ord är markerat. Eleven väljer vilken ordklass ordet
+      tillhör: substantiv, verb, adjektiv eller pronomen. Nivå 1 blandar substantiv och verb, nivå 2
+      lägger till adjektiv och nivå 3 pronomen – alltså fyra klasser och fyra svarsknappar. Efter varje
+      svar förklaras klassen med en rad (”springer – verb: något man gör eller är”), så att eleven får
+      själva kriteriet och inte bara ett rätt/fel. Fel svar kostar inget: eleven får en ny chans och
+      efter två försök pulserar rätt knapp. 114 meningar, åtta per runda, poäng som stjärnor.
+      Alla meningar är skrivna för appen och kontrolleras av <code>verify.mjs</code> (ordet finns
+      exakt en gång i meningen, varje ord har en och bara en klass, varje nivå har uppgifter i alla
+      sina klasser). Källa: Skolverket, läroplanen för grundskolan (Lgr22).</p>
+    </details>
+  </div>
+</div>
+
+<main id="spel" hidden>
+  <header class="hud">
+    <div class="hud-vanster">
+      <span class="niva" id="niva" aria-live="polite">Nivå 1</span>
+      <div class="prickar" id="prickar" aria-label="uppgifter i rundan"></div>
+    </div>
+    <div class="hud-hoger">
+      <div class="stjarnor" id="stjarnor" aria-label="stjärnor"><span class="stjarna">★</span><b id="stjarnantal">0</b></div>
+      <button id="ljud" class="ljud" aria-label="Stäng av ljudet" aria-pressed="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="ljud-pa"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="ljud-av" hidden><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <section class="brada">
+    <p class="fraga" id="fraga">Vilken ordklass är ordet?</p>
+    <div class="mening" id="mening"></div>
+    <p class="svar" id="svar" aria-live="polite"></p>
+  </section>
+
+  <section class="knappar" id="knappar"></section>
+</main>
+
+<div id="slut" hidden>
+  <div class="slut-inner">
+    <p class="slut-emoji" aria-hidden="true">🔎</p>
+    <h2 id="slut-rubrik">Rundan är klar!</h2>
+    <p class="slut-poang"><b id="slut-stjarnor">8</b> av 8 stjärnor</p>
+    <p class="slut-rad" id="slut-rad"></p>
+    <button class="slut-knapp" id="nasta">Nästa nivå</button>
+    <button class="slut-knapp slut-knapp--lugn" id="igen">Spela igen</button>
+  </div>
+</div>
+
+<footer class="fot" id="fot">Källa: Skolverket, Lgr22 · 114 meningar</footer>
+
+<script src="bank.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
