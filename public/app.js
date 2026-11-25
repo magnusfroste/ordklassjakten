@@ -79,6 +79,7 @@
     return null;
   }
   function saga(text) {
+          try { if (window.__rost && window.__rost(text, true)) return; } catch (e) { }
     if (!S.ljud || !('speechSynthesis' in window) || !text) return;
     try {
       window.speechSynthesis.cancel();
