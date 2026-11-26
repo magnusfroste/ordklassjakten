@@ -27,7 +27,7 @@ som måste scrollas, inget ljud som krävs (allt står också skrivet), inga lä
 | Ingen förlust | stjärnor kan inte bli negativa, ingen timer | 7/8 efter ett avsiktligt fel |
 | Faktakontroll | ordet finns exakt en gång i meningen, ett ord = en klass, 9 000 rundor | `node verify.mjs`: 114 uppgifter, 0 fel |
 | Mörk/ljus, rörelse | `prefers-reduced-motion` stänger av puls | `animationName: none` |
-| Inga externa resurser | bara `kotten.js` från skolappar.com | alla andra filer lokala |
+| Inga externa resurser | bara `kotten.js` från skolappar.org | alla andra filer lokala |
 
 ## Validering före bygge (go/no-go)
 
