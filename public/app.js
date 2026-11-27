@@ -69,31 +69,10 @@
   function ljudKlar() { [523, 659, 784, 1047].forEach(function (f, i) { setTimeout(function () { ton(f, 0.20, 'sine'); }, i * 110); }); }
 
   var roster = null;
-  function valjRost() {
-    if (!('speechSynthesis' in window)) return null;
-    if (roster) return roster;
-    var alla = window.speechSynthesis.getVoices() || [];
-    for (var i = 0; i < alla.length; i++) {
-      if ((alla[i].lang || '').toLowerCase().indexOf('sv') === 0) { roster = alla[i]; return roster; }
-    }
-    return null;
-  }
   function saga(text) {
           try { if (window.__rost && window.__rost(text, true)) return; } catch (e) { }
-    if (!S.ljud || !('speechSynthesis' in window) || !text) return;
-    try {
-      window.speechSynthesis.cancel();
-      var u = new SpeechSynthesisUtterance(text);
-      u.lang = 'sv-SE';
-      u.rate = 0.95;
-      u.pitch = 1.05;
-      var r = valjRost();
-      if (r) u.voice = r;
-      window.speechSynthesis.speak(u);
-    } catch (e) { /* klassrummets iPads tappar ibland talet – appen får aldrig stanna */ }
-  }
-  if ('speechSynthesis' in window) {
-    try { window.speechSynthesis.onvoiceschanged = function () { roster = null; valjRost(); }; } catch (e) {}
+    if (!S.ljud || !text) return;
+        console.warn('saknar mp3:', text);
   }
 
   function skicka(namn, varde) {
@@ -290,7 +269,7 @@
     el.ljud.setAttribute('aria-label', S.ljud ? 'Stäng av ljudet' : 'Sätt på ljudet');
     el.ljud.querySelector('.ljud-pa').hidden = !S.ljud;
     el.ljud.querySelector('.ljud-av').hidden = S.ljud;
-    if (!S.ljud) { try { window.speechSynthesis.cancel(); } catch (e) {} skicka('sound_off'); }
+    if (!S.ljud) { window.__rostStopp(); skicka('sound_off'); }
   });
 
   document.addEventListener('keydown', function (e) {
@@ -301,7 +280,7 @@
   });
 
   document.addEventListener('visibilitychange', function () {
-    if (document.hidden) { try { window.speechSynthesis.cancel(); } catch (e) {} }
+    if (document.hidden) { window.__rostStopp(); }
   });
 
   // för test: window.__game.startaNiva(3), __game.svara('verb'), __game.S
